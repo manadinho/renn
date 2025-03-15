@@ -176,41 +176,41 @@
                     </ul>
 
                     <!-- Checkbox Filter Options -->
-                    <ul class="pb-3 text-base text-gray-700" v-else>
-                        <li
-                            :key="option.id"
-                            v-for="(option, optionIndex) in filter.options"
-                        >
-                            <div class="flex select-none items-center gap-x-4 rounded hover:bg-gray-100 max-sm:gap-x-1 max-sm:!p-0 ltr:pl-2 rtl:pr-2">
-                                <input
-                                    type="checkbox"
-                                    :id="'option_' + option.id"
-                                    class="peer hidden"
-                                    :value="option.id"
-                                    v-model="appliedValues"
-                                    @change="applyValue"
-                                />
+                    <!-- Checkbox Filter Options -->
+                    <ul class="grid grid-cols-3 gap-4 pb-3 text-base text-gray-700">
+                        <li v-for="(option, optionIndex) in filter.options" :key="option.id">
+                            <div class="flex select-none items-center gap-x-4 rounded border border-gray-300 bg-black-300 text-white hover:bg-gray-100 max-sm:gap-x-1 max-sm:!p-0 ltr:pl-2 rtl:pr-2">
+                            <!-- Hidden Checkbox -->
+                            <input
+                                type="checkbox"
+                                :id="'option_' + option.id"
+                                class="peer hidden"
+                                :value="option.id"
+                                v-model="appliedValues"
+                                @change="applyValue"
+                            />
 
-                                <label
-                                    class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl"
-                                    role="checkbox"
-                                    aria-checked="false"
-                                    :aria-label="option.name"
-                                    :aria-labelledby="'label_option_' + option.id"
-                                    tabindex="0"
-                                    :for="'option_' + option.id"
-                                >
-                                </label>
+                            <!-- Custom Checkbox Icon -->
+                            <label
+                                :for="'option_' + option.id"
+                                class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl"
+                                role="checkbox"
+                                aria-checked="false"
+                                :aria-label="option.name"
+                                :aria-labelledby="'label_option_' + option.id"
+                                tabindex="0"
+                            ></label>
 
-                                <label
-                                    class="w-full cursor-pointer p-2 text-base text-gray-900 max-sm:p-1 max-sm:text-sm ltr:pl-0 rtl:pr-0"
-                                    :id="'label_option_' + option.id"
-                                    :for="'option_' + option.id"
-                                    role="button"
-                                    tabindex="0"
-                                >
-                                    @{{ option.name }}
-                                </label>
+                            <!-- Button Text -->
+                            <label
+                                :for="'option_' + option.id"
+                                :id="'label_option_' + option.id"
+                                class="w-full cursor-pointer p-2 text-base text-gray-900 max-sm:p-1 max-sm:text-sm ltr:pl-0 rtl:pr-0"
+                                role="button"
+                                tabindex="0"
+                            >
+                                @{{ option.name }}
+                            </label>
                             </div>
                         </li>
                     </ul>

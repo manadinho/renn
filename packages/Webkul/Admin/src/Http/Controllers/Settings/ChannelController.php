@@ -119,7 +119,7 @@ class ChannelController extends Controller
             $locale.'.name'                    => 'required',
             $locale.'.description'             => 'nullable',
             'inventory_sources'                => 'required|array|min:1',
-            'root_category_id'                 => 'required',
+            // 'root_category_id'                 => 'required',
             'hostname'                         => 'unique:channels,hostname,'.$id,
 
             /* currencies and locales */

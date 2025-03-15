@@ -13,7 +13,7 @@
             </x-shop::form.control-group>
 
             <!-- Company Name -->
-            <x-shop::form.control-group>
+            <!-- <x-shop::form.control-group>
                 <x-shop::form.control-group.label>
                     @lang('shop::app.checkout.onepage.address.company-name')
                 </x-shop::form.control-group.label>
@@ -24,7 +24,7 @@
                     ::value="address.company_name"
                     :placeholder="trans('shop::app.checkout.onepage.address.company-name')"
                 />
-            </x-shop::form.control-group>
+            </x-shop::form.control-group> -->
 
             {!! view_render_event('bagisto.shop.checkout.onepage.address.form.company_name.after') !!}
 
@@ -71,7 +71,7 @@
             </div>
 
             <!-- Email -->
-            <x-shop::form.control-group>
+            <!-- <x-shop::form.control-group>
                 <x-shop::form.control-group.label class="required !mt-0">
                     @lang('shop::app.checkout.onepage.address.email')
                 </x-shop::form.control-group.label>
@@ -86,7 +86,7 @@
                 />
 
                 <x-shop::form.control-group.error ::name="controlName + '.email'" />
-            </x-shop::form.control-group>
+            </x-shop::form.control-group> -->
 
             {!! view_render_event('bagisto.shop.checkout.onepage.address.form.email.after') !!}
 
@@ -132,7 +132,7 @@
 
             <div class="grid grid-cols-2 gap-x-5 max-md:grid-cols-1">
                 <!-- Country -->
-                <x-shop::form.control-group class="!mb-4">
+                <!-- <x-shop::form.control-group class="!mb-4">
                     <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0">
                         @lang('shop::app.checkout.onepage.address.country')
                     </x-shop::form.control-group.label>
@@ -159,12 +159,12 @@
                     </x-shop::form.control-group.control>
 
                     <x-shop::form.control-group.error ::name="controlName + '.country'" />
-                </x-shop::form.control-group>
+                </x-shop::form.control-group> -->
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.address.form.country.after') !!}
 
                 <!-- State -->
-                <x-shop::form.control-group>
+                <!-- <x-shop::form.control-group>
                     <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
                         @lang('shop::app.checkout.onepage.address.state')
                     </x-shop::form.control-group.label>
@@ -205,7 +205,7 @@
                     </template>
 
                     <x-shop::form.control-group.error ::name="controlName + '.state'" />
-                </x-shop::form.control-group>
+                </x-shop::form.control-group> -->
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.address.form.state.after') !!}
             </div>
@@ -232,7 +232,7 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.address.form.city.after') !!}
 
                 <!-- Postcode -->
-                <x-shop::form.control-group>
+                <!-- <x-shop::form.control-group>
                     <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-0">
                         @lang('shop::app.checkout.onepage.address.postcode')
                     </x-shop::form.control-group.label>
@@ -247,7 +247,7 @@
                     />
 
                     <x-shop::form.control-group.error ::name="controlName + '.postcode'" />
-                </x-shop::form.control-group>
+                </x-shop::form.control-group> -->
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.address.form.postcode.after') !!}
             </div>
@@ -289,15 +289,15 @@
 
                     default: () => ({
                         id: 0,
-                        company_name: '',
+                        company_name: 'N/A',
                         first_name: '',
                         last_name: '',
-                        email: '',
+                        email: 'noemail@renn.pk',
                         address: [],
-                        country: '',
-                        state: '',
+                        country: 'pakistan',
+                        state: 'N/A',
                         city: '',
-                        postcode: '',
+                        postcode: 'N/A',
                         phone: '',
                     }),
                 },
@@ -320,9 +320,9 @@
             },
 
             mounted() {
-                this.getCountries();
+                // this.getCountries();
 
-                this.getStates();
+                // this.getStates();
             },
 
             methods: {

@@ -41,6 +41,17 @@ class OnepageController extends APIController
     public function storeAddress(CartAddressRequest $cartAddressRequest): JsonResource
     {
         $params = $cartAddressRequest->all();
+        $params['billing']['email'] = 'noemail@renn.com';
+        $params['billing']['company_name'] = 'N/A';
+        $params['billing']['country'] = 'pakistan';
+        $params['billing']['state'] = 'N/A';
+        $params['billing']['postcode'] = 'N/A';
+
+        $params['shipping']['email'] = 'noemail@renn.com';
+        $params['shipping']['company_name'] = 'N/A';
+        $params['shipping']['country'] = 'pakistan';
+        $params['shipping']['state'] = 'N/A';
+        $params['shipping']['postcode'] = 'N/A';
 
         if (
             ! auth()->guard('customer')->check()

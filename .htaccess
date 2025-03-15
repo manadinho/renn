@@ -1,0 +1,47 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirect to public folder
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Exclude static assets from being processed by PHP
+    RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ [NC]
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ public/index.php [L]
+</IfModule>
+
+<IfModule mod_mime.c>
+    AddType text/css .css
+    AddType application/javascript .js
+    AddType image/svg+xml .svg .svgz
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(js)$">
+        Header set Content-Type "application/javascript"
+    </FilesMatch>
+
+    <FilesMatch "\.(css)$">
+        Header set Content-Type "text/css"
+    </FilesMatch>
+
+    <FilesMatch "\.(svg|svgz)$">
+        Header set Content-Type "image/svg+xml"
+    </FilesMatch>
+</IfModule>
+
+<FilesMatch "\.(svg|svgz)$">
+    Header set Content-Type "image/svg+xml"
+</FilesMatch>
+
+<FileMatch ".(?:html|php)$">
+    SetHandler application/x-lsphp82
+</FileMatch>
+
+# Fallback if SVG file is missing
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^themes/installer/default/build/assets/.*\.svg$ themes/installer/default/build/assets/missing-file.txt [L]
+</IfModule>
