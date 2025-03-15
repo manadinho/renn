@@ -108,6 +108,19 @@
 
                         {!! view_render_event('bagisto.shop.components.products.card.compare_option.after') !!}
 
+                        @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                            {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.before') !!}
+                            <span
+                                class="icon-cart absolute flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-lg sm:hidden ltr:right-1.5 rtl:left-1.5"
+                                role="button"
+                                style="top: 4.3rem;"
+                                :disabled="! product.is_saleable || isAddingToCart"
+                                tabindex="0"
+                                @click="addToCart()"
+                            >
+                            </span>
+                            {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.after') !!}
+                        @endif
                     </div>
                 </div>
             </div>
