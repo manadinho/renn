@@ -12,6 +12,7 @@ use Webkul\Sales\Transformers\OrderResource;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Requests\CartAddressRequest;
 use Webkul\Shop\Http\Resources\CartResource;
+use Illuminate\Support\Facades\Http;
 
 class OnepageController extends APIController
 {
@@ -187,6 +188,8 @@ class OnepageController extends APIController
 
         $order = $this->orderRepository->create($data);
 
+        $this->sendSlackNotification($order, $data['billing_address']);
+
         Cart::deActivateCart();
 
         session()->flash('order_id', $order->id);
@@ -195,6 +198,31 @@ class OnepageController extends APIController
             'redirect'     => true,
             'redirect_url' => route('shop.checkout.onepage.success'),
         ]);
+    }
+
+    private function sendSlackNotification($order, $address)
+    {
+        try {
+            $webhookUrl = "https://hooks.slack.com/services/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";
+
+            $orderId = $order->id;
+            $orderUrl = route('admin.sales.orders.view', $orderId);
+            $message = [
+                "text" => "📦 *New Order Received!*\n"
+                        . "*Order ID:* $orderId\n"
+                        . "*Total Items:* $order->total_item_count\n"
+                        . "*Grand Total:* $order->grand_total\n"
+                        . "*Customer:* " . $address['first_name'].' '.$address['last_name']."\n"
+                        . "*Address:*".' '.$address['address'].','.' '.$address['city']."\n"
+                        . "*View Order:* <$orderUrl|Click here>",
+                "username" => "OrderBot",
+                "icon_emoji" => ":shopping_trolley:"
+            ];
+            Http::post($webhookUrl, $message);
+            return true;
+        } catch (\Throwable $th) {
+            
+        }
     }
 
     /**
